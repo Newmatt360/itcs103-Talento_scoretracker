@@ -1,9 +1,8 @@
-# surname_scoreTracker.py
 from openpyxl import Workbook, load_workbook
 import tkinter as tk
 from tkinter import messagebox
 
-# Initialize Excel file
+# Excel
 def init_excel():
     try:
         return load_workbook("student_scores.xlsx")
@@ -14,12 +13,12 @@ def init_excel():
         wb.save("student_scores.xlsx")
         return wb
 
-# Create main window
+#main window
 window = tk.Tk()
 window.title("Score Tracker")
 window.geometry("300x200")
 
-# Larger font and spacing
+#font
 big_font = ("Arial", 12)
 tk.Label(window, text="Student Name:", font=big_font).pack(pady=5)
 name_entry = tk.Entry(window, font=big_font)
@@ -33,7 +32,7 @@ score_entry.pack()
 def calculate_status(score):
     return "Pass" if score >= 50 else "Fail"
 
-# Save data with basic styling
+# Save data
 def save_score():
     try:
         score = int(score_entry.get())
@@ -52,7 +51,7 @@ def save_score():
     name_entry.delete(0, tk.END)
     score_entry.delete(0, tk.END)
 
-# View records with basic table
+# View records
 def view_records():
     wb = init_excel()
     ws = wb.active
@@ -71,7 +70,7 @@ def view_records():
             tk.Label(view, text=value, relief="ridge", width=15 if col==0 else 10, 
                     bg="white" if row_num%2 else "#f0f0f0").grid(row=row_num, column=col)
 
-# Buttons with color
+# Buttons 
 tk.Button(window, text="Save Score", command=save_score, 
          bg="#4CAF50", fg="white", font=big_font).pack(pady=10)
 tk.Button(window, text="View Records", command=view_records,
